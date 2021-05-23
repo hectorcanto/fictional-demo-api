@@ -1,5 +1,5 @@
 import factory
-from factory import fuzzy, SubFactory, Iterator
+from factory import fuzzy, SubFactory, RelatedFactory
 
 from factory.django import DjangoModelFactory
 from fictional.vehicles.models import VehiclePart, Model, Vehicle
@@ -27,6 +27,7 @@ class ModelFactory(DjangoModelFactory):
 
     @factory.post_generation
     def model_parts(self, create, extracted, **kwargs):
+        print(extracted)
         if not create:
             # Simple build, do nothing.
             return
@@ -47,5 +48,5 @@ class VehicleFactory(DjangoModelFactory):
         model = Vehicle
 
     chassis_number = fuzzy.FuzzyInteger(MIN_VIN, MAX_VIN)
-    model_id = SubFactory(ModelFactory)
+    model = SubFactory(ModelFactory)
 

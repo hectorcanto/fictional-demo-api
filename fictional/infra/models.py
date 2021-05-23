@@ -1,3 +1,5 @@
+from uuid import uuid4
+
 from django.db import models
 
 
@@ -11,5 +13,7 @@ class TrackedAbstract(models.Model):
 
 
 class UUIDAbstract(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
 
-    id = models.UUIDField(primary_key=True)
+    class Meta:
+        abstract = True

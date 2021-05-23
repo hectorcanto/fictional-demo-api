@@ -36,7 +36,7 @@ check: urls ## Check the status of the project
 	@python manage.py check
 
 migrations:  ## Make pending Django migrations
-	@python manage.py makemigrations fictional
+	@python manage.py makemigrations fictional sale vehicles
 
 
 apply-migrations:  ## Apply pending migrations

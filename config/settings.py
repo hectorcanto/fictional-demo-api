@@ -28,7 +28,8 @@ INSTALLED_APPS = [
     "django_extensions",
     "fictional",  # TODO add each separate app
     "fictional.users",
-    "fictional.vehicles"
+    "fictional.vehicles",
+    "fictional.sales"
 ]
 
 MIDDLEWARE = [

@@ -1,15 +1,15 @@
 from django.db import models
 
 
-class PhoneField(models.TextField):
+class PhoneField(models.CharField):
     pass
 
 
-class RegionField(models.TextField):
+class RegionField(models.CharField):
     pass
 
 
-class AddressField(models.TextField):
+class AddressField(models.CharField):
     pass
 
 
