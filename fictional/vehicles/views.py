@@ -17,8 +17,12 @@ detail_conf = {
     "delete": "destroy"
 }
 
+sales_conf = {
+    "get": "list"
+}
 
-class ModelViewset(
+
+class ModelViewSet(
     mixins.CreateModelMixin,
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,
