@@ -1,24 +1,30 @@
+import uuid
+
 from django.db import models
 
-
-class Vehicle(models.Model):
-    chassis_number = models.IntegerField(primary_key=True)
-    model_id = models.ForeignKey()
+from fictional.domain.fields import VINumberField
 
 
 class Model(models.Model):
-    model_id = models.UUIDField(primary_key=True)
+    id = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True)
     model_name = models.TextField()
-    model_parts = models.ManyToManyRel("model_part")
+    model_parts = models.ManyToManyField("VehiclePart", related_name="related_models")
+    # If it needs to extend Intermediate table, use through and define it
 
+    def __repr__(self):
+        return f"<{self.__class__.__qualname__}: {self.model_name}>"
 
-# Intermediate table Many2Many
-# class PartsOfModel(models.Model):
-#    model_id = models.ForeignKey()
-#     part_id_ = models.ForeignKey()
 
 class VehiclePart(models.Model):
-    id = models.UUIDField(primary_key=True)
-    part_name = models.TextField()
-    related_models = models.ManyToManyRel("model_part")
 
+    id = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True)
+    name = models.TextField()
+
+
+class Vehicle(models.Model):
+
+    chassis_number = models.PositiveBigIntegerField(primary_key=True)
+    model = models.ForeignKey(Model, on_delete=models.SET_NULL, null=True)
+
+    def __repr__(self):
+        return f"<{self.__class__.__qualname__} {self.model.model_name}: {self.chassis_number}>"

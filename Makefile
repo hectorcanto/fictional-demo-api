@@ -36,7 +36,7 @@ check: urls ## Check the status of the project
 	@python manage.py check
 
 migrations:  ## Make pending Django migrations
-	@python manage.py makemigrations StocksAPI
+	@python manage.py makemigrations fictional
 
 
 apply-migrations:  ## Apply pending migrations
