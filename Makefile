@@ -51,12 +51,17 @@ run:  ## Launch the local server
 	@python3 manage.py runserver 8000
 
 test:  ##Launch test
-	PYTHONBREAKPOINT='IPython.core.debugger.set_trace' pytest
+	@PYTHONBREAKPOINT='IPython.core.debugger.set_trace' pytest
 
 current-test:  ## Launch current test with ipython debugger and no stdout capture
-	PYTHONBREAKPOINT='IPython.core.debugger.set_trace' pytest -m current -s
+	@PYTHONBREAKPOINT='IPython.core.debugger.set_trace' pytest -m current -s
 
 tree:  ## Show the structure
-	tree -d -L 2
+	@tree -d -L 2
+
+diagrams:
+	@python docs/diagrams/iter1.py
+	@python docs/diagrams/iter1.py
+	@echo "${GREEN}Created diagrams available at docs/diagrams ${REGULAR}"
 
 .PHONY: shell plus clean-py black flake linting cheeck migrations apply-migrations resetdb urls run test current-tests tree

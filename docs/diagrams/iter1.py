@@ -10,7 +10,8 @@ BASE_DIR = Path(__file__).resolve().parent
 
 with Diagram("Fictional Motor Co\nDiagram 1",
              filename=str(BASE_DIR / "architecture1"),
-             show=False, direction="BT", outformat="png"):
+             show=False, direction="BT", outformat="png",
+             graph_attr=dict(labelloc="t")):
 
     db = RDS("Operational DB cluster")
     backend = EC2("Core backend")
