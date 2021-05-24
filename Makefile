@@ -1,4 +1,4 @@
-PKGNAME=StocksAPI
+PKGNAME=fictional
 
 GREEN="\\e[32m"
 REGULAR="\\e[39m"
@@ -6,7 +6,6 @@ RED="\\e[91m"
 
 help: ## Prompts help for every command
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
-	# Issue: include breaks the parsing
 
 shell: ## Open a ipython Django shell
 	python manage.py shell -i ipython
@@ -51,11 +50,13 @@ urls:  ## Show active Django urls
 run:  ## Launch the local server
 	@python3 manage.py runserver 8000
 
-test:
-	PYTHONBREAKPOINT='IPython.core.debugger.set_trace' pytest -m api -s
+test:  ##Launch test
+	PYTHONBREAKPOINT='IPython.core.debugger.set_trace' pytest
 
+current-test:  ## Launch current test with ipython debugger and no stdout capture
+	PYTHONBREAKPOINT='IPython.core.debugger.set_trace' pytest -m current -s
 
-.PHONY: shell plus clean-py black flake linting cheeck migrations apply-migrations resetdb urls run test
+tree:  ## Show the structure
+	tree -d -L 2
 
-
-
+.PHONY: shell plus clean-py black flake linting cheeck migrations apply-migrations resetdb urls run test current-tests tree
