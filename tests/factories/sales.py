@@ -7,7 +7,7 @@ from factory.django import DjangoModelFactory
 from fictional.sales.models import Sale, Office
 from .common import FAKER
 from .vehicles import VehicleFactory
-
+from fictional.infra.helpers import dt_now
 
 def make_region():
     return FAKER.location_on_land()[3]
@@ -32,7 +32,7 @@ class SalesFactory(DjangoModelFactory):
     class Meta:
         model = Sale
 
-    created_at = factory.LazyFunction(lambda: datetime.now(tz=timezone.utc))
+    created_at = factory.LazyFunction(dt_now)
     model = factory.LazyAttribute(lambda o: o.vehicle.model)
     vehicle = SubFactory(VehicleFactory)
     office = SubFactory(OfficeFactory)

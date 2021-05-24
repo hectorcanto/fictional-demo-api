@@ -27,7 +27,6 @@ class ModelFactory(DjangoModelFactory):
 
     @factory.post_generation
     def model_parts(self, create, extracted, **kwargs):
-        print(extracted)
         if not create:
             # Simple build, do nothing.
             return
