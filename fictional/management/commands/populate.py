@@ -21,5 +21,5 @@ class Command(BaseCommand):
         models = ModelFactory.create_batch(5)
         for model in models:
             number = randint(8, 12)
-            print(f"Creating {number} Sales for Model {model.model_parts})")
+            print(f"Creating {number} Sales for Model {model.id}:{model.model_parts})")
             SalesFactory.create_batch(number, vehicle=VehicleFactory(model=model), created_at=fuzzy.FuzzyDateTime(NOW - ONE_YEAR_AGO, NOW))

@@ -16,7 +16,7 @@ class SaleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sale
         fields = ["model_id", "office_id", "id", "vehicle_id", "created_at"]
-        #read_only_fields = ["id, created_at"]
+        read_only_fields = ["id"]
 
     def create(self, validated_data):
 

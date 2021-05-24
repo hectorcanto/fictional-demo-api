@@ -42,7 +42,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-WSGI_APPLICATION = 'fictional.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.application'
 
 TEMPLATES = [
     {
