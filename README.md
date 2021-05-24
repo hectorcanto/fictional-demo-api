@@ -74,6 +74,11 @@ To list a few:
 - Add cache
 - Add a JSON:API renderer
 
+### More endpoints
+
+With the given domain we could easily expand our API with the following endpoints:
+- 
+
 ## References
 
 Here are the reference I used the most
