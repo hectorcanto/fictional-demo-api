@@ -31,6 +31,6 @@ def test_create(rf):
 
     payload = render_payload(response)
 
-    assert response.status_code == 201
+    assert response.status_code == 201, payload
     assert Sale.objects.count() == 1
     assert payload["model_id"] == sale_fixture["model_id"]

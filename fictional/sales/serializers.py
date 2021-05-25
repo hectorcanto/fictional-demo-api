@@ -20,13 +20,13 @@ class OfficeSerializer(serializers.ModelSerializer):
 
 class SaleSerializer(serializers.ModelSerializer):
 
-    id = serializers.IntegerField()
+    id = serializers.IntegerField(read_only=True)
     created_at = serializers.DateTimeField(read_only=True)  # TODO serialize to Timestamp
     model_id = serializers.PrimaryKeyRelatedField(read_only=True, source="model")
-    model = BasicModelSerializer()
     vehicle_id = serializers.PrimaryKeyRelatedField(read_only=True, source="vehicle")
     office_id = serializers.PrimaryKeyRelatedField(read_only=True, source="office")
-    office = OfficeSerializer()
+    model = BasicModelSerializer(read_only=True)
+    office = OfficeSerializer(read_only=True)
     # TODO office can be taken from user requesting
 
     class Meta:
