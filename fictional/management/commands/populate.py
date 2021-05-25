@@ -12,7 +12,6 @@ ONE_YEAR_AGO = timedelta(days=365)
 
 
 class Command(BaseCommand):
-
     def __init__(self):
         super(Command, self).__init__()
 
@@ -20,9 +19,15 @@ class Command(BaseCommand):
         print("Creating new vehicle models")
         models = []
         for _ in range(5):
-            model = ModelFactory.create_batch(1, model_parts=[part.id for part in PartsFactory.create_batch(5)])
+            model = ModelFactory.create_batch(
+                1, model_parts=[part.id for part in PartsFactory.create_batch(5)]
+            )
             models.append(model)
         for model in models:
             number = randint(8, 12)
             print(f"Creating {number} Sales for Model {model.id}:{model.model_parts})")
-            SalesFactory.create_batch(number, vehicle=VehicleFactory(model=model), created_at=fuzzy.FuzzyDateTime(NOW - ONE_YEAR_AGO, NOW))
+            SalesFactory.create_batch(
+                number,
+                vehicle=VehicleFactory(model=model),
+                created_at=fuzzy.FuzzyDateTime(NOW - ONE_YEAR_AGO, NOW),
+            )

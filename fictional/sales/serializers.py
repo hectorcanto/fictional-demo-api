@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
-from .models import Sale, Office
 from fictional.vehicles.models import Model, Vehicle
+from .models import Sale, Office
 
 
 class SaleSerializer(serializers.ModelSerializer):
@@ -24,10 +24,7 @@ class SaleSerializer(serializers.ModelSerializer):
         vehicle_id = self.initial_data.get("vehicle_id")
         office_id = self.initial_data["office_id"]
 
-        extra = dict(
-            model=Model.objects.get(pk=model_id),
-            office=Office.objects.get(pk=office_id)
-        )
+        extra = dict(model=Model.objects.get(pk=model_id), office=Office.objects.get(pk=office_id))
         if vehicle_id:
             extra["vehicle"] = Vehicle.objects.get(pk=vehicle_id)
         return Sale.objects.create(**validated_data, **extra)

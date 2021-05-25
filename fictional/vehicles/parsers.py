@@ -1,5 +1,6 @@
-from rest_framework.exceptions import ValidationError
 from datetime import datetime
+
+from rest_framework.exceptions import ValidationError
 
 
 def parse_since_until(request) -> (datetime, datetime):
@@ -21,4 +22,4 @@ def parse_interval(value: str, name: str):
 def str2month(value: str):
     if value is None:
         return value
-    return datetime.strptime(value, '%Y/%m').date()
+    return datetime.strptime(value, "%Y/%m").date()

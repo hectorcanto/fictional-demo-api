@@ -31,7 +31,7 @@ def test_some_sales_since(rf, model_sales):
 
     assert response.status_code == 200, payload
     # assert len(payload) == 20
-    assert payload["average"] == 4.2
+    assert payload["average"] == 4.17
     assert payload["count"] == 20
 
 
@@ -58,7 +58,7 @@ def test_all_model_sales(rf, model_sales):
 
     assert response.status_code == 200, payload
     # assert len(payload) == 20
-    assert payload["average"] == 5.94, payload
+    assert payload["average"] == 5.88, payload
     assert payload["count"] == 20
 
 
@@ -74,22 +74,3 @@ def test_model_sales_bad_param(rf, parameter, value):
     response = view(request)
     payload = render_payload(response)
     assert response.status_code == 400, payload
-
-
-
-"""
-def test_create(rf):
-    model = ModelFactory()
-    office = OfficeFactory()
-    vehicle = VehicleFactory()
-    sale_fixture = dict(model_id=model.id, office_id=office.id, vehicle_id=vehicle.chassis_number)
-
-    request = rf.post("/sales/", sale_fixture)
-    response = view(request)
-
-    payload = render_payload(response)
-
-    assert response.status_code == 201
-    assert Sale.objects.count() == 1
-    assert payload["model_id"] == sale_fixture["model_id"]
-"""

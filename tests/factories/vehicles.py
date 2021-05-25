@@ -1,7 +1,7 @@
 import factory
-from factory import fuzzy, SubFactory, RelatedFactory
-
+from factory import fuzzy, SubFactory
 from factory.django import DjangoModelFactory
+
 from fictional.vehicles.models import VehiclePart, Model, Vehicle
 
 PART_NAMES = ("bumper", "radiator", "door", "decklid", "spoiler", "roof",
@@ -37,7 +37,7 @@ class ModelFactory(DjangoModelFactory):
             return
 
         if extracted:
-            # A list of groups were passed in, use them
+            # A list of parts were passed in, use them
             for part in extracted:
                 self.model_parts.add(part)
 
@@ -53,4 +53,3 @@ class VehicleFactory(DjangoModelFactory):
 
     chassis_number = fuzzy.FuzzyInteger(MIN_VIN, MAX_VIN)
     model = SubFactory(ModelFactory)
-

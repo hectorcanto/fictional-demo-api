@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.urls import path
 
-from fictional.vehicles.views import ModelsViewSet, collection_conf, detail_conf, ModelSalesView, sales_conf
+from fictional.vehicles.views import ModelsViewSet, collection_conf, detail_conf, \
+    ModelSalesView, sales_conf
 from fictional.sales.views import SalesViewSet, collection_conf as sale_conf
 
 urlpatterns = [

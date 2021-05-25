@@ -48,7 +48,7 @@ class ModelSalesView(
             return queryset.filter(**interval)
         return queryset
 
-    def list(self,  request, *args, **kwargs):
+    def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
         count = queryset.count()
 
@@ -59,28 +59,28 @@ class ModelSalesView(
             raise ValidationError(f"{avg_range} is not a valid 'average' value")
         if count:
             first_occurrence = queryset.first().created_at.date()
-            average, period = compute_average(count, first_occurrence, self.since, self.until, avg_range)
+            average, period = compute_average(
+                count, first_occurrence, self.since, self.until, avg_range
+            )
 
         skip = True if request.query_params.get("skip") in ["1", "true", "t"] else False
         if skip:
-            return Response({
+            return Response({"count": count, "average": average, "period": period})
+
+        return Response(
+            {
+                "data": queryset,  # TODO serialize all
                 "count": count,
                 "average": average,
-                "period": period
-            })
-
-        return Response({
-            "data": queryset,  # TODO serialize all
-            "count": count,
-            "average": average,
-            "period": period,
-        })  # TODO JSONAPI style serializer
+                "period": period,
+            }
+        )  # TODO JSONAPI style serializer
 
 
 def compute_average(count: int, first: datetime, since: date, until: date, range_type: str):
     old = since if since else first
     new = until if until else date.today()
-    interval = (new-old).days
+    interval = (new - old).days
 
     divider = 30
     if range_type == "year":
@@ -94,16 +94,8 @@ def compute_average(count: int, first: datetime, since: date, until: date, range
     return round(count / interval, 2), f"{round(interval,2)} {range_type}"
 
 
-collection_conf = {
-    "get": "list",
-    "post": "creates"
-}
+collection_conf = {"get": "list", "post": "creates"}
 
-detail_conf = {
-    "get": "retrieve",
-    "delete": "destroy"
-}
+detail_conf = {"get": "retrieve", "delete": "destroy"}
 
-sales_conf = {
-    "get": "list"
-}
+sales_conf = {"get": "list"}

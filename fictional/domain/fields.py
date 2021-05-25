@@ -3,7 +3,7 @@ from typing import NewType, Union
 
 from django.db import models
 
-ReadableVIN = NewType('ReadableVIN', str)
+ReadableVIN = NewType("ReadableVIN", str)
 
 
 # TODO we could have used or created a VIN library
@@ -20,8 +20,10 @@ class VINumberField(models.IntegerField):
 
 # https://cars.usnews.com/cars-trucks/best-cars-blog/2017/01/what-is-a-vin-number
 # inspired in https://rgxdb.com/r/61PVCR9B
-VIN_REGEX = re.compile(r"^(?P<wmi>[\d]{3})(?P<vds>[\d]{5})(?P<check>\d)"
-                       r"(?P<vis>(?P<year>\d)(?P<plant>\d)(?P<seq1>[\d]{2})(?P<seq2>[\d]{4}))$")
+VIN_REGEX = re.compile(
+    r"^(?P<wmi>[\d]{3})(?P<vds>[\d]{5})(?P<check>\d)"
+    r"(?P<vis>(?P<year>\d)(?P<plant>\d)(?P<seq1>[\d]{2})(?P<seq2>[\d]{4}))$"
+)
 """
 REGEX for a numeric VIN without hyphens
 """
@@ -34,6 +36,6 @@ def to_friendly_vin(numeric_vin: Union[int, str]) -> ReadableVIN:
     if not result:
         raise TypeError("VIN is not valid")
     blk = result.groupdict()
-    return ReadableVIN(f'{blk["wmi"]}-{blk["vds"]}-{blk["year"]}-{blk["plant"]}-{blk["seq1"]}-{blk["seq2"]}')
-
-
+    return ReadableVIN(
+        f'{blk["wmi"]}-{blk["vds"]}-{blk["year"]}-{blk["plant"]}-{blk["seq1"]}-{blk["seq2"]}'
+    )
