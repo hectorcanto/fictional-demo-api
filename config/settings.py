@@ -27,7 +27,6 @@ INSTALLED_APPS = [
     # TODO django-filters
     "django_extensions",
     "fictional",  # TODO add each separate app
-    "fictional.users",
     "fictional.vehicles",
     "fictional.sales"
 ]

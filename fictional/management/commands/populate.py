@@ -22,10 +22,11 @@ class Command(BaseCommand):
             model = ModelFactory.create_batch(
                 1, model_parts=[part.id for part in PartsFactory.create_batch(5)]
             )
-            models.append(model)
+            models.append(model[0])
+
         for model in models:
             number = randint(8, 12)
-            print(f"Creating {number} Sales for Model {model.id}:{model.model_parts})")
+            print(f"Creating {number} Sales for Model {model.id}:{model.model_name})")
             SalesFactory.create_batch(
                 number,
                 vehicle=VehicleFactory(model=model),
