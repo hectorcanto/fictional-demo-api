@@ -21,7 +21,6 @@ def model_sales():
     return model
 
 
-@pytest.mark.current
 def test_some_sales_since(rf, model_sales):
 
     since = "2021/01"
@@ -35,7 +34,6 @@ def test_some_sales_since(rf, model_sales):
     assert payload["count"] == 20
 
 
-@pytest.mark.current
 def test_some_sales_until(rf, model_sales):
 
     since = "2021/04"
@@ -49,7 +47,6 @@ def test_some_sales_until(rf, model_sales):
     assert payload["count"] == 20
 
 
-@pytest.mark.current
 def test_all_model_sales(rf, model_sales):
 
     request = rf.get(f"/models/{model_sales.id}/sales?skip=1")

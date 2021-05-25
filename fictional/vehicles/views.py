@@ -94,7 +94,7 @@ def compute_average(count: int, first: datetime, since: date, until: date, range
     return round(count / interval, 2), f"{round(interval,2)} {range_type}"
 
 
-collection_conf = {"get": "list", "post": "creates"}
+collection_conf = {"get": "list", "post": "create"}
 
 detail_conf = {"get": "retrieve", "delete": "destroy"}
 
