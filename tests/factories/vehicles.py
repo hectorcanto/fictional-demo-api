@@ -4,7 +4,12 @@ from factory import fuzzy, SubFactory, RelatedFactory
 from factory.django import DjangoModelFactory
 from fictional.vehicles.models import VehiclePart, Model, Vehicle
 
-PART_NAMES = ("bumper", "radiator", "door", )
+PART_NAMES = ("bumper", "radiator", "door", "decklid", "spoiler", "roof",
+              "trunk", "window", "door seal", "hinge", "lock", "tank", "windshield",
+              "seat", "handle", "latch", "grille", "bonnet", "spring", "glass",
+              "regulator", "carburator", "antenna", "radio", "alternator", "battery",
+              "gauge", "deposit")
+# TODO more parts, with variations and grouping (electronics, chassis, motor ...) and their associated manufacturing line
 
 
 class PartsFactory(DjangoModelFactory):

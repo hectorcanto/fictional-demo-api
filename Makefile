@@ -29,13 +29,12 @@ flake:  ## Pass style check with Flake8, prompting something if everything ok
 linting:  ## Pass pylint linter, check setup.cfg for conf details
 	@pylint --rcfile=setup.cfg ${PKGNAME}/ tests/ | tee .coverage-reports/pylint.txt
 
-
 # Django
 check: urls ## Check the status of the project
 	@python manage.py check
 
 migrations:  ## Make pending Django migrations
-	@python manage.py makemigrations fictional sale vehicles
+	@python manage.py makemigrations fictional sales vehicles
 
 
 apply-migrations:  ## Apply pending migrations
@@ -56,6 +55,7 @@ test:  ##Launch test
 current-test:  ## Launch current test with ipython debugger and no stdout capture
 	@PYTHONBREAKPOINT='IPython.core.debugger.set_trace' pytest -m current -s
 
+# Other
 tree:  ## Show the structure
 	@tree -d -L 2
 

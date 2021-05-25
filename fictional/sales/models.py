@@ -9,9 +9,10 @@ class Sale(TrackedAbstract):
     # Tracked: updated_at
     id = models.AutoField(primary_key=True)
     created_at = models.DateTimeField(db_index=True, default=dt_now)
-    model = models.ForeignKey("vehicles.Model", on_delete=models.DO_NOTHING)
+    model = models.ForeignKey("vehicles.Model", on_delete=models.SET_NULL, null=True)
     vehicle = models.ForeignKey("vehicles.Vehicle", on_delete=models.SET_NULL, null=True)
-    office = models.ForeignKey("sales.Office", on_delete=models.DO_NOTHING)
+    office = models.ForeignKey("sales.Office", on_delete=models.SET_NULL, null=True)
+    # TODO implement soft_delete to avoid loosing traceability
 
 
 class Office(TrackedAbstract):

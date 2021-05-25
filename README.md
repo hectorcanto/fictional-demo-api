@@ -42,7 +42,19 @@ For the implementation we will combine:
 1. Create a virtualenv
 1. Install the dependencies
 ```bash
-pip install -r requirments
+pip install -r requirements.txt
+```
+1. Delete the DB if any
+```bash
+rm db.sqlite
+```
+1. Apply migrations
+```bash
+make apply-migrations
+```
+1. Repopulate the database
+```
+python manage.py populate
 ```
 
 ## Launch test
@@ -52,6 +64,17 @@ pytest
 ```
 
 It should prompt code coverage and test resulta
+
+### Launch server
+
+Simply do:
+```bash
+make run
+```
+
+The server will be available at localhost:8000 in debug mode
+You can use the available Postman collection and environment at docs/postman/
+
 
 ## Documentation
 
