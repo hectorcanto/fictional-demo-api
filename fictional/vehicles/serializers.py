@@ -14,10 +14,19 @@ class PartSerializer(serializers.ModelSerializer):
         read_only_fields = ["id"]
 
 
-class ModelSerializer(serializers.HyperlinkedModelSerializer):
+class BasicModelSerializer(serializers.ModelSerializer):
 
     id = serializers.IntegerField()
     model_name = serializers.CharField()
+
+    class Meta:
+        model = Model
+        fields = ("id", "model_name")
+        read_only_fields = ["id"]
+
+
+class ModelSerializer(BasicModelSerializer):
+
     model_parts = PartSerializer(many=True)
 
     class Meta:

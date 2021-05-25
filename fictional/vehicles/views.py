@@ -5,6 +5,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 
 from fictional.sales.models import Sale
+from fictional.sales.serializers import SaleSerializer
 from .models import Model
 from .parsers import parse_since_until
 from .serializers import ModelSerializer
@@ -67,12 +68,13 @@ class ModelSalesView(
         if skip:
             return Response({"count": count, "average": average, "period": period})
 
+        # TODO return period in ISO3901 format 1y2m5d
         return Response(
             {
-                "data": queryset,  # TODO serialize all
                 "count": count,
                 "average": average,
                 "period": period,
+                "data": SaleSerializer(list(queryset), many=True).data,
             }
         )  # TODO JSONAPI style serializer
 

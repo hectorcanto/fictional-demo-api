@@ -83,23 +83,108 @@
 					"response": []
 				},
 				{
-					"name": "Card Detail",
+					"name": "Model Detail",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "{{host}}:{{port}}/models/1",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"models",
+								"1"
+							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Card Detail Copy",
+					"name": "Model Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}:{{port}}/models/83",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"models",
+								"83"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sales per Model",
+			"item": [
+				{
+					"name": "Sales per model FULL",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "{{host}}:{{port}}/models/4/sales?skip=0",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"models",
+								"4",
+								"sales"
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sales per model LESS 1 year",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}:{{port}}/models/4/sales?skip=1&since=2020/04&until=2021/04&average=year",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"models",
+								"4",
+								"sales"
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": "1"
+								},
+								{
+									"key": "since",
+									"value": "2020/04"
+								},
+								{
+									"key": "until",
+									"value": "2021/04"
+								},
+								{
+									"key": "average",
+									"value": "year"
+								}
+							]
 						}
 					},
 					"response": []

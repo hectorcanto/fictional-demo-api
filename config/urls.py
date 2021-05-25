@@ -7,7 +7,7 @@ from fictional.sales.views import SalesViewSet, collection_conf as sale_conf
 
 urlpatterns = [
     path(r'models/<int:pk>', ModelsViewSet.as_view(detail_conf)),
-    path(r'models/<int:pk>/sales>', ModelSalesView.as_view(sales_conf)),
+    path(r'models/<int:pk>/sales', ModelSalesView.as_view(sales_conf)),
     path(r'models/', ModelsViewSet.as_view(collection_conf)),
 
     path(r'sales/', SalesViewSet.as_view(sale_conf))

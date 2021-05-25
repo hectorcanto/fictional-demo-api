@@ -2,21 +2,37 @@ from rest_framework import serializers
 
 from fictional.vehicles.models import Model, Vehicle
 from .models import Sale, Office
+from fictional.vehicles.serializers import BasicModelSerializer
+
+
+class OfficeSerializer(serializers.ModelSerializer):
+
+    id = serializers.IntegerField()
+    address = serializers.CharField()
+    phone = serializers.CharField()
+    region = serializers.CharField()  # TODO add django-country or simillar for it
+
+    class Meta:
+        model = Sale
+        fields = ["id", "address", "region", "phone"]
+        read_only_fields = ["id",]
 
 
 class SaleSerializer(serializers.ModelSerializer):
 
-    id = serializers.IntegerField(read_only=True)
+    id = serializers.IntegerField()
     created_at = serializers.DateTimeField(read_only=True)  # TODO serialize to Timestamp
     model_id = serializers.PrimaryKeyRelatedField(read_only=True, source="model")
+    model = BasicModelSerializer()
     vehicle_id = serializers.PrimaryKeyRelatedField(read_only=True, source="vehicle")
     office_id = serializers.PrimaryKeyRelatedField(read_only=True, source="office")
+    office = OfficeSerializer()
     # TODO office can be taken from user requesting
 
     class Meta:
         model = Sale
-        fields = ["model_id", "office_id", "id", "vehicle_id", "created_at"]
-        read_only_fields = ["id"]
+        fields = ["id", "model", "office", "id", "vehicle_id", "created_at", "office_id", "model_id"]
+        read_only_fields = ["id", "model", "office"]
 
     def create(self, validated_data):
 
